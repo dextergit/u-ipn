@@ -12,10 +12,13 @@ https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=web
 
 h1 {
   margin: 0px;
-  color: white;
 }
 
 h2 {
+  color: #ffffff
+}
+
+h3 {
   color: #ffffff
 }
 
@@ -47,13 +50,10 @@ h2 {
 .section-content {
   background-color: #666699;
   text-align: left;
-  text-align: u;
   border-radius: 20px;
   padding-right: 15px;
   padding-left: 15px;
   padding-bottom: 15px;
   padding-top: 15px;
-  margin: 5px auto;
-
-
+  margin: 5px;
 }

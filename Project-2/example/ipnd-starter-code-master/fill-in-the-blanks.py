@@ -54,15 +54,21 @@ answers = ""
 def play_game(_string_to_guess, _guess_items_in_level, _answers):
     _array_to_guess = _string_to_guess.split()
 
+    max_guesses = 2
+    _playing = True
 
     for _guess_item in _guess_items_in_level:
         _waiting_for_user_input = True
+        guess_counter = 0
 
-        while _waiting_for_user_input:
+        while _waiting_for_user_input and _playing:
+
             print ""
             print _string_to_guess
             print ""
+
             guess = raw_input("Guess an answer for __" + str(_guess_item + 1) + "__: ")
+
             if guess == _answers[_guess_item]:
                 print ""
                 print "Correct!"
@@ -73,9 +79,16 @@ def play_game(_string_to_guess, _guess_items_in_level, _answers):
 
                 while c < len(_array_to_guess):
                     if _array_to_guess[c] == "___" + str(_guess_item + 1) + "___":
-                        print "FOUND: ___" + str(_guess_item  + 1) + "___"
                         _array_to_guess[c] = guess
                     c += 1
+            else:
+                guess_counter +=1
+                print "Wrong answer. Guesses left: " + str(max_guesses - guess_counter) + "."
+                if guess_counter >= max_guesses:
+                    print "Game over."
+                    _playing = False
+                    break
+
 
     print _array_to_guess
 
@@ -100,8 +113,3 @@ while waiting_for_user_input:
 print("You selected level: " + game_level + ".")
 
 play_game(string_to_guess, guess_items_in_level, answers)
-
-
-
-
-#print(user_input)

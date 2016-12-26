@@ -47,20 +47,38 @@ print "------"
 
 waiting_for_user_input = True
 game_level = 0
-my_blank_list = ""
-my_string = ""
-my_answer_list = ""
+guess_items_in_level = ""
+string_to_guess = ""
+answers = ""
 
-def swap_word(string_with_blanks, blank_list, answer_list):
-    # for blank in blank_list:
-    #     for answer in answer_list:
-    #         if blank in answer:
-    #             print "hello!"
-        # waiting_for_user_input = True
-        # while waiting_for_user_input:
-        #     substitute_entry = raw_input("What should be substituted in for " + blank + "? ")
-        #     for answer in answer_list:
-        #         if
+def play_game(_string_to_guess, _guess_items_in_level, _answers):
+    _array_to_guess = _string_to_guess.split()
+
+
+    for _guess_item in _guess_items_in_level:
+        _waiting_for_user_input = True
+
+        while _waiting_for_user_input:
+            print ""
+            print _string_to_guess
+            print ""
+            guess = raw_input("Guess an answer for __" + str(_guess_item + 1) + "__: ")
+            if guess == _answers[_guess_item]:
+                print ""
+                print "Correct!"
+                print ""
+                _waiting_for_user_input = False
+
+                c = 0
+
+                while c < len(_array_to_guess):
+                    if _array_to_guess[c] == "___" + str(_guess_item + 1) + "___":
+                        print "FOUND: ___" + str(_guess_item  + 1) + "___"
+                        _array_to_guess[c] = guess
+                    c += 1
+
+    print _array_to_guess
+
 
 while waiting_for_user_input:
 
@@ -68,9 +86,9 @@ while waiting_for_user_input:
 
     if game_level == "1":
         print "You picked 1 - Easy."
-        my_string = "A ___1___ in __2__ is created with the def keyword."
-        my_blank_list = ["___1___", "___2___"]
-        my_answer_list = ["variable", "Python"]
+        string_to_guess = "A ___1___ in ___2___ is created with the def keyword."
+        guess_items_in_level = [0, 1]
+        answers = ["variable", "Python"]
         waiting_for_user_input = False
     elif game_level == "2":
         waiting_for_user_input = False
@@ -80,7 +98,8 @@ while waiting_for_user_input:
         print "You picked a level that does not exist."
 
 print("You selected level: " + game_level + ".")
-# swap_word(my_string, my_blank_list, my_answer_list)
+
+play_game(string_to_guess, guess_items_in_level, answers)
 
 
 

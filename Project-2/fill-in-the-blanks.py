@@ -139,6 +139,7 @@ string_to_guess = rules[1]
 guess_items_in_level = rules[2]
 answers = rules[3]
 game_description = rules[4]
+score = 0
 
 user_output("You picked Level " + game_level + " - " + game_description  + ".")
 
@@ -153,18 +154,18 @@ for guess_item in guess_items_in_level:
 
         user_output(string_to_guess)
 
-        guess = raw_input("Guess an answer for __" + str(guess_item + 1) + "__: ")
+        guess = raw_input("Guess an answer for ___" + str(guess_item + 1) + "___: ")
 
         if guess == answers[guess_item]:
             user_output("Correct!")
+            score += 1
             waiting_for_user_input = False
 
-            c = 0
+            if "___" + str(guess_item + 1) + "___" in array_to_guess:
+                i = array_to_guess.index("___" + str(guess_item + 1) + "___")
+                array_to_guess[i] = guess
 
-            while c < len(array_to_guess):
-                if array_to_guess[c] == "___" + str(guess_item + 1) + "___":
-                    array_to_guess[c] = guess
-                c += 1
+            print array_to_guess
         else:
             guess_counter +=1
             print "Wrong answer. Guesses left: " + str(max_guesses - guess_counter) + "."
@@ -173,4 +174,7 @@ for guess_item in guess_items_in_level:
                 playing = False
                 break
 
-print(array_to_guess)
+if score == len(guess_items_in_level):
+    user_output("You won!")
+
+#print(array_to_guess)

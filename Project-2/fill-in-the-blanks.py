@@ -91,17 +91,29 @@ def play_game(_string_to_guess, _guess_items_in_level, _answers):
 
     print _array_to_guess
 
-def get_rules():
-    max_guesses = 4
-    return [max_guesses]
+def get_rules(_game_level):
+# Sets the rules of the game. Inputs game level. Outputs game parameters including max number of guesses and answers.
+
+    if game_level == "1":
+        _max_guesses = 4
+        _string_to_guess = "A ___1___ in ___2___ is created with the ___3___ ___4___."
+        _guess_items_in_level = [0, 1, 2, 3]
+        _answers = ["function", "Python", "def", "keyword"]
+        _game_description = "Easy"
+    elif game_level == "2":
+        pass
+    elif game_level == "3":
+        pass
+
+    return [_max_guesses, _string_to_guess, _guess_items_in_level, _answers, _game_description]
 
 def play_game_new(_string_to_guess, _guess_items_in_level, _answers):
     pass
 
 def user_output(_message):
-    print "------"
+    print ""
     print _message
-    print "------"
+    print ""
 
 user_output("Welcome to the IPN Game.")
 
@@ -110,24 +122,26 @@ while waiting_for_user_input:
     game_level = raw_input("Select a Level (1, 2, 3): ")
 
     if game_level == "1":
-        print "You picked 1 - Easy."
-        string_to_guess = "A ___1___ in ___2___ is created with the def keyword."
-        guess_items_in_level = [0, 1]
-        answers = ["function", "Python"]
         waiting_for_user_input = False
     elif game_level == "2":
         waiting_for_user_input = False
     elif game_level == "3":
         waiting_for_user_input = False
     else:
-        print "You picked a level that does not exist."
-
-print("You selected level: " + game_level + ".")
+        user_output("You picked a level that does not exist.")
 
 #play_game(string_to_guess, guess_items_in_level, answers)
 
-rules = get_rules()
+rules = get_rules(game_level)
+
 max_guesses = rules[0]
+string_to_guess = rules[1]
+guess_items_in_level = rules[2]
+answers = rules[3]
+game_description = rules[4]
+
+user_output("You picked Level " + game_level + " - " + game_description  + ".")
+
 array_to_guess = string_to_guess.split()
 playing = True
 
@@ -137,16 +151,12 @@ for guess_item in guess_items_in_level:
 
     while waiting_for_user_input and playing:
 
-        print ""
-        print string_to_guess
-        print ""
+        user_output(string_to_guess)
 
         guess = raw_input("Guess an answer for __" + str(guess_item + 1) + "__: ")
 
-        if guess ==answers[guess_item]:
-            print ""
-            print "Correct!"
-            print ""
+        if guess == answers[guess_item]:
+            user_output("Correct!")
             waiting_for_user_input = False
 
             c = 0
@@ -162,3 +172,5 @@ for guess_item in guess_items_in_level:
                 print "Game over."
                 playing = False
                 break
+
+print(array_to_guess)

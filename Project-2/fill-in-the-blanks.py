@@ -41,9 +41,6 @@ References:
 2. https://storage.googleapis.com/supplemental_media/udacityu/7710122499/madlibs_generator.py
 """
 
-print "------"
-print "Welcome to the IPN Game."
-print "------"
 
 waiting_for_user_input = True
 game_level = 0
@@ -92,9 +89,21 @@ def play_game(_string_to_guess, _guess_items_in_level, _answers):
                     _playing = False
                     break
 
-
     print _array_to_guess
 
+def get_rules():
+    max_guesses = 4
+    return [max_guesses]
+
+def play_game_new(_string_to_guess, _guess_items_in_level, _answers):
+    pass
+
+def user_output(_message):
+    print "------"
+    print _message
+    print "------"
+
+user_output("Welcome to the IPN Game.")
 
 while waiting_for_user_input:
 
@@ -115,4 +124,41 @@ while waiting_for_user_input:
 
 print("You selected level: " + game_level + ".")
 
-play_game(string_to_guess, guess_items_in_level, answers)
+#play_game(string_to_guess, guess_items_in_level, answers)
+
+rules = get_rules()
+max_guesses = rules[0]
+array_to_guess = string_to_guess.split()
+playing = True
+
+for guess_item in guess_items_in_level:
+    waiting_for_user_input = True
+    guess_counter = 0
+
+    while waiting_for_user_input and playing:
+
+        print ""
+        print string_to_guess
+        print ""
+
+        guess = raw_input("Guess an answer for __" + str(guess_item + 1) + "__: ")
+
+        if guess ==answers[guess_item]:
+            print ""
+            print "Correct!"
+            print ""
+            waiting_for_user_input = False
+
+            c = 0
+
+            while c < len(array_to_guess):
+                if array_to_guess[c] == "___" + str(guess_item + 1) + "___":
+                    array_to_guess[c] = guess
+                c += 1
+        else:
+            guess_counter +=1
+            print "Wrong answer. Guesses left: " + str(max_guesses - guess_counter) + "."
+            if guess_counter >= max_guesses:
+                print "Game over."
+                playing = False
+                break

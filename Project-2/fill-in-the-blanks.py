@@ -48,49 +48,6 @@ guess_items_in_level = ""
 string_to_guess = ""
 answers = ""
 
-def play_game(_string_to_guess, _guess_items_in_level, _answers):
-# This is the main function of the guessing game.
-# Inputs: (1) string for guessing, (2) the blank items in the script, (3) the answers to the blanks.
-
-    _array_to_guess = _string_to_guess.split()
-
-    max_guesses = 2
-    _playing = True
-
-    for _guess_item in _guess_items_in_level:
-        _waiting_for_user_input = True
-        guess_counter = 0
-
-        while _waiting_for_user_input and _playing:
-
-            print ""
-            print _string_to_guess
-            print ""
-
-            guess = raw_input("Guess an answer for __" + str(_guess_item + 1) + "__: ")
-
-            if guess == _answers[_guess_item]:
-                print ""
-                print "Correct!"
-                print ""
-                _waiting_for_user_input = False
-
-                c = 0
-
-                while c < len(_array_to_guess):
-                    if _array_to_guess[c] == "___" + str(_guess_item + 1) + "___":
-                        _array_to_guess[c] = guess
-                    c += 1
-            else:
-                guess_counter +=1
-                print "Wrong answer. Guesses left: " + str(max_guesses - guess_counter) + "."
-                if guess_counter >= max_guesses:
-                    print "Game over."
-                    _playing = False
-                    break
-
-    print _array_to_guess
-
 def get_rules(_game_level):
 # Sets the rules of the game. Inputs game level. Outputs game parameters including max number of guesses and answers.
 
@@ -176,5 +133,3 @@ for guess_item in guess_items_in_level:
 
 if score == len(guess_items_in_level):
     user_output("You won!")
-
-#print(array_to_guess)
